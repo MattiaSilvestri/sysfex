@@ -37,13 +37,13 @@ string pkgs()
     // Snap
     if (std::filesystem::exists("/bin/snap"))
     {
-        int cnt = stoi(exec("snap list | wc -l")) - 1;
+        int cnt = stoi(exec("snap list &>/dev/null | wc -l")) - 1;
         pkg = pkg + std::to_string(cnt) + " (snap) ";
     }
 
     // flatpak
     if (std::filesystem::exists("/bin/flatpak"))
-        pkg = pkg + exec("flatpak list | wc -l") + " (flatpak) ";
+        pkg = pkg + exec("flatpak | wc -l") + " (flatpak) ";
 
     return pkg;
 }
